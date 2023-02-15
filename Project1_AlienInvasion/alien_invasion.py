@@ -65,9 +65,14 @@ class AlienInvasion:
                 if event.key == pygame.K_RIGHT: #if right key
                     # Move the ship to the right.
                     self.ship.moving_right = True #change the flag to true in the instance of ship
+                elif event.key == pygame.K_LEFT:
+                    self.ship.moving_left = True
+
             elif event.type == pygame.KEYUP: #if key is UP
                 if event.key == pygame.K_RIGHT: #if it is the right key
                     self.ship.moving_right = False #reset flag to false 
+                elif event.key == pygame.K_LEFT:
+                    self.ship.moving_left = False
 
 
     def _update_screen(self):
