@@ -29,7 +29,8 @@ class AlienInvasion:
         self.ship = Ship(self) #creating an instance of Ship (Ship class was imported from ship file above)
         #this allows us to access Ship's methods within the Alien Invasion class
         #The (self) input arguement refers to the current instance of AlienInvasion and gives Ship access to the game's resouces, e.g. screen
-        #A good way to remember this is that if a method needs anything from THIS LEVEL (i.e. the screen attribute) then pass (self)
+        #Ship's __init__ requires 2 inputs (self, ai_game) - this is because it needs access to the attributes...
+        # of an AlienINvasion class to get values such as screen size (and these could be unique to each instance of the class)
         #I.e. - SHIP NEEDS TO ACCESS DATA WITHIN ALIENINVASION
 
 
@@ -62,18 +63,27 @@ class AlienInvasion:
                 sys.exit()
 
             elif event.type == pygame.KEYDOWN: #If key pressed DOWN
-                if event.key == pygame.K_RIGHT: #if right key
-                    # Move the ship to the right.
-                    self.ship.moving_right = True #change the flag to true in the instance of ship
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = True
-
+                self._check_keydown_events(event)
+                
             elif event.type == pygame.KEYUP: #if key is UP
-                if event.key == pygame.K_RIGHT: #if it is the right key
-                    self.ship.moving_right = False #reset flag to false 
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = False
+                self._check_keyup_events(event)
 
+                
+
+    def _check_keydown_events(self, event):
+        """Respond to keypresses."""
+        if event.key == pygame.K_RIGHT: #if right key         
+            # Move the ship to the right.
+            self.ship.moving_right = True #change the flag to true in the instance of ship
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+
+    def _check_keyup_events(self, event):
+        """Respond to key releases."""
+        if event.key == pygame.K_RIGHT: #if it is the right key
+            self.ship.moving_right = False #reset flag to false 
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
 
     def _update_screen(self):
         """Update images on the screen, and flip to new screen"""
