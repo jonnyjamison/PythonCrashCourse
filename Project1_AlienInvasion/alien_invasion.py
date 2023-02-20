@@ -70,7 +70,7 @@ class AlienInvasion:
 
                 
 
-    def _check_keydown_events(self, event):
+    def _check_keydown_events(self, event): #Requires an event input to determine what button was pressed 
         """Respond to keypresses."""
         if event.key == pygame.K_RIGHT: #if right key         
             # Move the ship to the right.
